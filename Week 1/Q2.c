@@ -1,34 +1,45 @@
 #include <stdio.h>
 int main()
 {
-	int i, low, high, mid, n, key, array[100];
-	printf("Enter number of elements to enter in the array : ");
-	scanf("%d", &n);
-	printf("\nNow enter the elements....\n");
-	for(i = 0; i < n; i++)
-		scanf("%d", &array[i]);
-	printf("\nEnter the key element to find....");
-	scanf("%d", &key);
-	low = 0;
-	high = n - 1;
-	mid = (low+high)/2;
-	int numOFcompare=0;
-	while (low <= high)
+	int T;
+	scanf("%d", &T);
+	int comparison=0, flag=0;
+	while (T--)
 	{
-		numOFcompare++;
-		if(array[mid] < key)
-			low = mid + 1;
-		else if (array[mid] == key)
+	    	comparison=0, flag=0;
+		int N;
+		scanf("%d", &N);
+		int A[N];
+		for (int i=0; i<N; i++)
+			scanf("%d", &A[i]);
+		int key;
+		scanf("%d", &key);
+
+        	int low=0, high=N-1, mid;
+        	while (low<=high)
 		{
-			printf("\n\nNumber is present and number of comparisons are %d", numOFcompare);
-			break;
-		}
-		else
-			high = mid - 1;
-		mid = (low + high)/2;
-	}
-	if(low > high)
-		printf("\n\nNumber is not present and number of comparisons are %d", numOFcompare);
-	
-	return 0;
+			mid=(low+high)/2;
+			if (A[mid]==key)
+			{
+				comparison++;
+				flag=1;
+				printf("Present %d\n",comparison);
+            		}
+			else if (A[mid]<key)
+			{
+				comparison++;
+				low=mid+1;
+			}
+			else
+			{
+				comparison++;
+				high=mid-1;
+			}
+			if (flag==1)
+                break;
+        }
+		if (flag==0)
+            printf("not Present %d\n",comparison);
+    }
+    return 0;
 }
